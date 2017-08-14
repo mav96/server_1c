@@ -113,3 +113,45 @@ Install 1C configuration on 1C server
  https://host/demo
 ```
 
+
+# Backup and restore
+
+## 1. Backup database
+```
+sudo lxc-attach -n srvdb
+# Choose folder for backups: 
+chown postgres:postgres /mnt/backup
+
+su - postgres
+psql
+
+# Get list of databases - \l. Our DB is demo
+\q
+pg_dump -U postgres -Fc -Z9 demo -f /mnt/backup/demo.dump
+```
+where 
+```
+-U (user)
+-F (format of file) с (custom — format of zipping pg_dump, also possible tar and plain text)
+-Z (mode of zipping) 0 — 9 (0 — without compressing, 9 — max compressing)
+-f (to file)
+```
+
+
+## 2. Restore database
+new database
+
+```
+su - postgres
+createdb -T template0 newdb
+pg_restore -d newdb /mnt/backup/demo.dump
+```
+
+replace database
+
+```
+su - postgres
+dropdb demo
+pg_restore -C -d postgres  /mnt/backup/demo.dump
+```
+
