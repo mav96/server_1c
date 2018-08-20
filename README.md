@@ -171,3 +171,10 @@ drive
 ```
 
 You will see a link in your terminal, which you can paste into your browser.  You may be prompted to login to Google.  Next give Gdrive allow permissions, then Copy/Paste the code from the page into the terminal.  Google drive command is now ready.
+
+## 2. Add backup.sh in cron
+```
+crontab -e
+```
+For example: 0 4 * * * bash /root/backup.sh
+
