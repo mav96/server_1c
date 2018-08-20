@@ -44,6 +44,9 @@ Database is ready. For tuning see [Configure PostgreSQL](https://its.1c.ru/db/me
 sudo lxc-attach -n srv1c
 apt-get update
 apt-get install apache2 openssh-server
+apt-get install imagemagick-6.q16:i386
+apt-get install imagemagick:i386
+
 #Downloads deb to 1c
 dpkg -i 1c/* 
 
@@ -155,3 +158,16 @@ dropdb demo
 pg_restore -C -d postgres  /mnt/backup/demo.dump
 ```
 
+# Backup on google drive
+
+See https://www.experts-exchange.com/articles/29279/Backup-Linux-Servers-to-Google-Drive.html
+
+## 1. Install drive
+```
+wget -O drive https://drive.google.com/uc?id=0B3X9GlR6EmbnMHBMVWtKaEZXdDg 
+mv drive /usr/sbin/drive 
+chmod 755 /usr/sbin/drive
+drive
+```
+
+You will see a link in your terminal, which you can paste into your browser.  You may be prompted to login to Google.  Next give Gdrive allow permissions, then Copy/Paste the code from the page into the terminal.  Google drive command is now ready.
